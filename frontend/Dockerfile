@@ -7,6 +7,8 @@ RUN yarn install
 
 COPY ./ /app/
 
+ENV REACT_APP_SOCKET_URL=http://89.223.125.234/
+
 RUN yarn build
 
 
