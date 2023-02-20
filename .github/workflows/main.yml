@@ -23,4 +23,9 @@ jobs:
           password: ${{ secrets.HOST_PASSWORD }}
           script_stop: true
           command_timeout: 15m
-          script: echo Hello
+          script: |
+            cd /azi
+            git pull
+            docker-compose down --remove-orphans
+            docker-compose -f docker-compose up -d --build
+            docker rmi $(docker images -f 'dangling=true' -q) || true
