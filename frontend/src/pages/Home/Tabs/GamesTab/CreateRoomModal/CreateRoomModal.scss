@@ -1,0 +1,29 @@
+.modal {
+
+  .ant-modal-content {
+    background: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+    border: 1px solid #26272C;
+    box-shadow: -0.558px 7.981px 12.65px rgba(26, 26, 26, 0.36);
+    border-radius: 4px;
+
+    .ant-modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .ant-modal-header {
+      background: transparent;
+      .ant-modal-title {
+        color: #FFFFFF;
+      }
+    }
+  }
+  .modal-actions {
+    width: 100%;
+  }
+  .modal-body {
+    flex: 1;
+    width: 100%;
+    padding: 30px 0px 0px 0px;
+  }
+}

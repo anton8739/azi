@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+.button-primary {
+  background: linear-gradient(180deg, #EBC57A 0%, #E29A0C 100%);
+  box-shadow: -0.558px 7.981px 12.65px rgba(26, 26, 26, 0.36);
+  border-radius: 32px;
+  padding: 5px;
+  color: $color_white;
+  height: unset;
+  font-weight: 600;
+
+}

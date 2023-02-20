@@ -1,0 +1,54 @@
+@import "src/styles/variables";
+
+html {
+  --antd-wave-shadow-color: none!important;
+}
+
+.ant-btn-default{
+  &:hover {
+    color: unset !important;
+    border-color: unset !important;
+  }
+}
+
+.ant-input {
+  &:hover {
+    border-color: #EBC57A !important;
+    box-shadow: unset !important;
+  }
+  &:focus {
+    border-color: #EBC57A !important;
+    box-shadow: unset !important;
+  }
+
+}
+.ant-input-affix-wrapper {
+  &:hover {
+    border-color: #EBC57A !important;
+    box-shadow: unset !important;
+  }
+  &:focus {
+    border-color: #EBC57A !important;
+    box-shadow: unset !important;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #34373F;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #FBAB00;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #FBAB00;
+}

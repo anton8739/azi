@@ -1,0 +1,150 @@
+.player-card {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &.disabled {
+    opacity: 0.2;
+  }
+  &.left {
+    left: 30px;
+    top: calc( 50% - 60px);
+  }
+  &.left-bottom {
+    left: calc( 25%);
+    top: 60px;
+  }
+  &.bottom {
+    left: calc( 50% - 50px );
+    top: 30px;
+  }
+  &.right-bottom {
+    right: calc( 25%);
+    top: 60px;
+  }
+  &.right {
+    right: 30px;
+    top: calc( 50% - 60px);
+  }
+  .player-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .player-info-content  {
+      display: flex;
+      flex-direction: column;
+      .player-name {
+        font-weight: 700;
+        font-size: 14.7581px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+      }
+      .player-balance {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 400;
+        font-size: 14.7581px;
+        line-height: 18px;
+        color: #FFFFFF;
+      }
+    }
+  }
+  .player-card-status {
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    padding: 4px;
+  }
+  .player-active-card {
+    position: absolute;
+    &.left {
+      right: -150px;
+      top: 50%;
+      @media (max-width: 1000px) {
+        right: -70px;
+      }
+    }
+    &.left-bottom {
+      left: 50%;
+      bottom: -100px;
+      @media (max-width: 1000px) {
+        bottom: -70px;
+      }
+    }
+    &.bottom {
+      left: 50%;
+      bottom: -100px;
+      @media (max-width: 1000px) {
+        bottom: -70px;
+      }
+    }
+    &.right-bottom {
+      right: 50%;
+      bottom: -100px;
+      @media (max-width: 1000px) {
+        bottom: -70px;
+      }
+    }
+    &.right {
+      left: -150px;
+      top: 50%;
+      @media (max-width: 1000px) {
+        left: -70px;
+      }
+    }
+    img {
+      width: 42px;
+    }
+  }
+}
+.player-card-wp {
+  display: flex;
+  justify-content: center;
+  .player-cards {
+    width: 40px;
+    height: 60px;
+    position: relative;
+    transform: rotate(180deg);
+  }
+
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-origin: 50% 200% 0;
+    transition: 0.5s;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .item:nth-of-type(1) {
+    transform: rotate(15deg);
+
+  }
+
+  .item:nth-of-type(2) {
+    transform: rotate(0deg);
+
+  }
+
+  .item:nth-of-type(3) {
+    transform: rotate(-15deg);
+
+  }
+
+}

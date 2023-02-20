@@ -1,0 +1,42 @@
+.game-bank {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  .tramp-card {
+    img {
+      width: 60px;
+      @media (max-width: 500px) {
+        width: 30px;
+      }
+    }
+  }
+  .bank {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    .bank-label {
+      font-weight: 500;
+      font-size: 12.7223px;
+      line-height: 12px;
+      color: #E29A0C;
+    }
+    .bank-balance {
+      padding: 7px;
+      background: linear-gradient(180deg, #EBC57A 0%, #E29A0C 100%);
+      border-radius: 13.3187px;
+      font-weight: 900;
+      font-size: 12.7223px;
+      line-height: 12px;
+      color: #FFFFFF;
+      min-width: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 500px) {
+        min-width: 50px;
+      }
+    }
+  }
+}

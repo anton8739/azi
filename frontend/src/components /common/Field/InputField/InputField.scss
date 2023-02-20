@@ -1,0 +1,42 @@
+@import "src/styles/variables";
+.input-field-wp {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .input-field:-webkit-autofill,
+  .input-field:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  .input-field {
+    background: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+    border: 1px solid #26272C;
+    border-radius: 28px;
+    color: $color_white;
+    height: 48px;
+    input:-internal-autofill-selected {
+      background: linear-gradient(180deg, #1B1C21 0%, #101114 100%) !important;
+      color: $color_white !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+    &::placeholder {
+      color: $color_white;
+      opacity: 0.5;
+    }
+    input {
+      background: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+
+      color: $color_white;
+      &::placeholder {
+        color: $color_white;
+        opacity: 0.5;
+      }
+    }
+  }
+  .input-field-error {
+    padding: 0px 0px 0px 15px;
+    color: red;
+  }
+}

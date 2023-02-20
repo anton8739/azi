@@ -1,0 +1,30 @@
+.user-table {
+  .ant-table {
+    border-radius: unset;
+    background: transparent;
+    .ant-table-thead >tr>th {
+      border: none;
+      background: transparent;
+      text-align: end;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      color: #FFFFFF;
+
+      &::before {
+        background: none !important;
+      }
+    }
+    .ant-table-thead >tr>td {
+      display: none;
+    }
+    .ant-table-cell {
+      text-align: end;
+      border-bottom: none !important;
+    }
+    .ant-table-cell-row-hover {
+      background: none !important;
+    }
+  }
+
+}

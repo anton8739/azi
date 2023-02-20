@@ -1,0 +1,11 @@
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .username {
+    color: #EBC57A;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

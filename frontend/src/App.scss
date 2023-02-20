@@ -1,0 +1,23 @@
+@import 'asserts/font/montserratStyle.css';
+@import 'asserts/font/ubuntuStyle.css';
+@import "styles/reset.scss";
+body {
+  font-family: Montserrat;
+  margin: 0;
+  padding: 0;
+}
+
+.main-spin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #26272C;
+  .ant-spin {
+    color: #E29A0C;
+    .ant-spin-dot-item {
+      background: #E29A0C;
+    }
+  }
+}

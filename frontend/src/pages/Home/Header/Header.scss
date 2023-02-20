@@ -1,0 +1,20 @@
+.home-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background: #000000;
+  opacity: 0.9;
+  width: 100%;
+  .home-header-container {
+    flex: 1;
+    width: calc(100% - 30px);
+    max-width: 700px;
+    margin: 0px 15px 0px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+
+  }
+}

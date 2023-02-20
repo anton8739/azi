@@ -1,0 +1,26 @@
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .balance-wp {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .balance-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #EBC57A 0%, #E29A0C 100%);
+      cursor: pointer;
+    }
+    .balance {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 16px;
+      color: #EBC57A;
+    }
+  }
+}

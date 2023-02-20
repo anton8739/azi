@@ -1,0 +1,55 @@
+.room-card {
+  background: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+  border: 1px solid #26272C;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: pointer;
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #E9B95B;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .players-wp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .text {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: #FFFFFF;
+    }
+    .value  {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: #FFFFFF;
+    }
+  }
+  .bid-wp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    .text {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: #FFFFFF;
+    }
+    .value  {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 16px;
+      color: #E9B95B;
+    }
+  }
+}

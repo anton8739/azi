@@ -1,0 +1,17 @@
+.home-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background: #000000;
+  opacity: 0.9;
+  width: 100%;
+  gap: 10px;
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #E7AF43;
+    cursor: pointer;
+  }
+}

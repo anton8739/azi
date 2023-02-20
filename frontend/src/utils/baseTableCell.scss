@@ -1,0 +1,33 @@
+.username-cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.games-cell {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: right;
+  color: #CCDAE0;
+}
+.score-cell {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: right;
+  color: #CCDAE0;
+}
+.position-cell {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #E7B147;
+}

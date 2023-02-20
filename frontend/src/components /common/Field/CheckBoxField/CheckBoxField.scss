@@ -1,0 +1,27 @@
+.checkbox-field-wp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  .checkbox-field-label {
+    color: #FFFFFF;
+    opacity: 0.5;
+  }
+  .ant-checkbox-checked {
+    .ant-checkbox-inner {
+      background-color: #E29A0C !important;
+      border-color: #E29A0C !important;
+      &:hover {
+        border-color: #EBC57A !important;
+        box-shadow: unset !important;
+      }
+      &:focus {
+        border-color: #EBC57A !important;
+        box-shadow: unset !important;
+      }
+    }
+    &:after {
+      border: none!important;
+    }
+  }
+
+}

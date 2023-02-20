@@ -1,0 +1,87 @@
+.user-card-wp {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  .move-btn {
+    margin-left: auto;
+    width: fit-content;
+  }
+  @media (max-width: 767px) {
+    width: 200px;
+    height: 150px;
+    left: calc(50% - 100px);
+  }
+  @media (max-width: 400px) {
+    left: calc( 10px);
+  }
+  .user-hand-cards {
+    width: 140px;
+    height: 200px;
+    margin: 50px auto;
+    position: absolute;
+    bottom: -100px;
+    left: calc(50% - 70px);
+    @media (max-width: 767px) {
+      width: 70px;
+      height: 100px;
+      bottom: -70px;
+      left: calc(50% - 35px);
+    }
+  }
+
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-origin: 50% 200% 0;
+    transition: 0.5s;
+    img {
+      width: 140px;
+      @media (max-width: 767px) {
+        width: 70px;
+      }
+    }
+  }
+
+  .item:nth-of-type(1) {
+    transform: rotate(-15deg);
+
+    &.active:hover {
+      transform: rotate(-15deg) translateY(-20px);
+    }
+    &.active.selected {
+      transform: rotate(-15deg) translateY(-20px);
+    }
+  }
+
+  .item:nth-of-type(2) {
+    transform: rotate(0deg);
+
+    &.active:hover {
+      transform: rotate(0deg) translateY(-20px);
+    }
+    &.active.selected {
+      transform: rotate(0deg) translateY(-20px);
+    }
+  }
+
+  .item:nth-of-type(3) {
+    transform: rotate(15deg);
+
+    &.active:hover {
+      transform: rotate(15deg) translateY(-20px);
+    }
+    &.active.selected {
+      transform: rotate(15deg) translateY(-20px);
+    }
+  }
+
+  .item.active:hover {
+    cursor: pointer;
+  }
+}

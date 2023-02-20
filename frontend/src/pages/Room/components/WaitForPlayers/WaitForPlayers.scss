@@ -1,0 +1,20 @@
+.wait-for-players {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: rgba(3, 3, 3, 0.8);
+  z-index: 1;
+  .wait-for-players-spin {
+    .ant-spin {
+      color: #E29A0C;
+      .ant-spin-dot-item {
+        background: #E29A0C;
+      }
+    }
+  }
+}
