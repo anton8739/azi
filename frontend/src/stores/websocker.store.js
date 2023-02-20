@@ -5,7 +5,7 @@ import {notifier} from "utils/notifier";
 import {rootStore} from "stores/index";
 import {SOCKET_EVENTS} from "utils/constants";
 
-const socket = io('http://localhost:8080');
+const socket = io(process.env.SOCKET_URL || 'http://localhost:8080');
 
 export default class WebsocketStore {
 
