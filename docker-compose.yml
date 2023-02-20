@@ -30,7 +30,7 @@ services:
     container_name: azi-frontend
     restart: always
     environment:
-      - SOCKET_URL=backend
+      - REACT_APP_SOCKET_URL=backend
       - APP_ENV=production
     ports:
       - "80:80"
