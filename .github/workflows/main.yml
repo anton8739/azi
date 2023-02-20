@@ -1,0 +1,26 @@
+
+name: Deploy Azi
+
+on:
+
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+ 
+    name: Deploy Metalan
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{ secrets.HOST_URL }}
+          username: ${{ secrets.HOST_LOGIN }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script_stop: true
+          command_timeout: 15m
+          script: echo Hello
