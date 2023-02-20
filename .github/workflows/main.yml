@@ -46,5 +46,7 @@ jobs:
             cd /root/azi
             git pull
             docker-compose down --remove-orphans
+            echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker-compose -f docker-compose.yml pull
             docker-compose -f docker-compose.yml up -d --build
             docker rmi $(docker images -f 'dangling=true' -q) || true
