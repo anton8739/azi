@@ -15,10 +15,11 @@ import TengeIcon from "components /common/Icon/TengeIcon";
 import UserHandCard from "pages/Room/components/UserHandCard/UserHandCard";
 import bg_sound from 'asserts/audio/bg_audio.mp3'
 import ReactAudioPlayer from 'react-audio-player';
+import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 const Room = () => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'))
     const {setMute, user} = useAuthStore();
-    const {gameState,leaveRoom} = useWebsocketStore();
+    const {gameState,leaveRoom, userBid,waitForMove} = useWebsocketStore();
     const {isConnected,joinRoom} = useWebsocketStore();
     const history = useHistory();
     const params = useParams();
@@ -46,15 +47,20 @@ const Room = () => {
                     <MuteIcon style={{width: iconSize, height: iconSize}} fill='#EBC57A'/>}
             </div>
             <div className="room-user-panel">
-                <UserHandCard cards={gameState.user.cards} status={gameState.user.dropCard}/>
-                <div className="balance">
-                    <div>
-                        {user.balance}
+                <UserHandCard cards={gameState.user.cards} status={gameState.user.dropCard} bid={userBid}/>
+                <div className="user-panel-menu">
+                    {waitForMove && <div className='loader'>
+                        <LoadingTimer size={40} isPlaying={true} timerValue={15}/>
+                    </div>}
+                    <div className="balance">
+                        <div>
+                            {user.balance}
+                        </div>
+                        <TengeIcon/>
                     </div>
-                    <TengeIcon/>
                 </div>
             </div>
-            <RoomGameZone gameState={gameState}/>
+            <RoomGameZone gameState={gameState} waitForMove={waitForMove}/>
         </div>
     );
 }

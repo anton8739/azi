@@ -37,7 +37,6 @@ module.exports = async (roomId, io) => {
     const suites = [0, 1, 2, 3]
     const selectedSuites = getSuites(suites);
     const shuffledDeck = shuffleDeck(getDeckOfCards(selectedSuites));
-    console.log(shuffledDeck)
     try {
         let game_state = await getGameState(roomId)
         let cardCount = 0;

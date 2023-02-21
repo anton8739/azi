@@ -7,6 +7,7 @@ const getPrivateGameStates = require("./getPrivateGameStates");
 const setWaitForPlayers = require("./setWaitForPlayers")
 const gameStart = require("./game/gameStart")
 const gameSleep = require("./game/gameSleep")
+const makeMove= require("./makeMove")
 module.exports = {
     joinRoom,
     leaveRoom,
@@ -16,5 +17,6 @@ module.exports = {
     getPrivateGameStates,
     setWaitForPlayers,
     gameStart,
-    gameSleep
+    gameSleep,
+    makeMove
 };

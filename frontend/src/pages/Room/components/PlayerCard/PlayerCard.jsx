@@ -9,7 +9,7 @@ import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 import {observer} from "mobx-react-lite";
 import {statusMap} from "stores/room.store";
 
-const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disabled, timer, loading}) => {
+const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disabled, timer, loading, bid}) => {
     let cards = [];
     for (let i = 0; i < cardsAmount; i++) {
         cards.push(i)
@@ -26,7 +26,8 @@ const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disable
     return (
         <div className={`player-card ${diractionClassMap[diraction]} ${disabled && "disabled"}`}>
             <div className="player-info">
-                {loading ? <LoadingTimer size={35} timerValue={timer} isPlaying={loading}/> : <Avatar size={35} icon={<img src={icon}/>}/>}
+                {loading ? <LoadingTimer size={35} timerValue={timer} isPlaying={loading}/> :
+                    <Avatar size={35} icon={<img src={icon}/>}/>}
                 <div className="player-info-content">
                     <div className="player-name">
                         <div>{player.name}</div>
@@ -51,9 +52,13 @@ const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disable
             <div className="player-card-status" style={{display: !!status ? "flex" : "none", background: statusBg}}>
                 {statusMap[status]}
             </div>
-            {activeCard && <div className={`player-active-card ${diractionClassMap[diraction]}`}>
-                <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>
-            </div>}
+            <div className={`player-active-card ${diractionClassMap[diraction]}`}>
+                {activeCard && <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>}
+                {bid ? <div className="player-card-bid">
+                    <div>{bid}</div>
+                    <CoinsIcon/></div> : ""}
+            </div>
+
         </div>
     );
 }

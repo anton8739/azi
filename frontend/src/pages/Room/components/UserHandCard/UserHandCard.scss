@@ -8,13 +8,18 @@
   .move-btn {
     margin-left: auto;
     width: fit-content;
+    display: flex;
+    gap: 10px;
   }
   @media (max-width: 767px) {
     width: 200px;
     height: 150px;
     left: calc(50% - 100px);
+    @media (max-width: 500px) {
+      height: 100px;
+    }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     left: calc( 10px);
   }
   .user-hand-cards {
@@ -83,5 +88,10 @@
 
   .item.active:hover {
     cursor: pointer;
+  }
+  .bid-user-hand {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }

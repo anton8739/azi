@@ -3,7 +3,8 @@ import './UserHandCard.scss'
 import {cardImageMap} from "utils/cardMap";
 import {observer} from "mobx-react-lite";
 import ButtonPrimary from "components /common/Button/ButtonPrimary /ButtonPrimary";
-const UserHandCard = ({cards, status}) => {
+import CoinsIcon from "components /common/Icon/CoinsIcon";
+const UserHandCard = ({cards, status, bid}) => {
     const [activeCard, setActiveCard] = useState(null);
     const dropCard = (card) => {
         if(activeCard) {
@@ -12,7 +13,11 @@ const UserHandCard = ({cards, status}) => {
     }
     return (
         <div className="user-card-wp">
-            {status && <div className="move-btn"><ButtonPrimary onClick={dropCard}>Походить</ButtonPrimary></div>}
+            <div className="move-btn">
+                {bid ? <div className="bid-user-hand"><div>{bid}</div><CoinsIcon/></div> : ""}
+                {status &&   <ButtonPrimary onClick={dropCard}>Походить</ButtonPrimary>}
+            </div>
+
             <div className={`user-hand-cards `}>
                 {cards?.map(card =>
                     <div

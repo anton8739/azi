@@ -1,6 +1,6 @@
 const {Server} = require("socket.io");
-const {CONNECTION, JOIN_ROOM, UPDATE_GAME_STATE, UPDATE_USER_PRIVATE,LEAVE_ROOM} = require("./eventsTypes");
-const {joinRoom,leaveRoom} = require('../service/index')
+const {CONNECTION, JOIN_ROOM, UPDATE_GAME_STATE, UPDATE_USER_PRIVATE,LEAVE_ROOM,MAKE_MOVE} = require("./eventsTypes");
+const {joinRoom,leaveRoom,makeMove} = require('../service/index')
 module.exports = server => {
 
     const io = new Server(server, {
@@ -13,7 +13,7 @@ module.exports = server => {
 
         let connectedUser = null;
         let connectedRoom = null;
-        console.log('User connected');
+        console.log('Пользователь подключелся к socket.io');
         /*join room event*/
         socket.on(JOIN_ROOM, async (roomId, userId) => {
             connectedUser=userId;
@@ -22,24 +22,30 @@ module.exports = server => {
             socket.join(`user${userId}`);
             socket.join(roomTitle);
             await joinRoom(roomId, userId,io)
-            console.log(`User joined room ${roomId}`);
+            console.log(`Пользователь id =${userId} подключился к комнате id =${roomId}`);
 
         });
 
 
+        /*make move event*/
+        socket.on(MAKE_MOVE, async (roomId, userId, pass, bid,currentBid ) => {
+            await makeMove(roomId, userId,pass, bid,currentBid,io)
+            console.log(`Пользователь id=${userId} сделал ход в комнате id = ${roomId}`);
+
+        });
         /*leave room event*/
         socket.on(LEAVE_ROOM, async (roomId,userId) => {
             const roomTitle = `room${roomId}`
             const {publicState} = await leaveRoom(roomId, userId)
             console.log(`User leaved room ${roomId}`);
+            connectedUser = null;
+            connectedRoom = null;
             io.to(roomTitle).emit(UPDATE_GAME_STATE, publicState);
         });
 
 
         /*disconnect event*/
         socket.on('disconnect', async () => {
-            console.log(connectedUser)
-            console.log(connectedRoom)
             if (connectedUser && connectedRoom) {
                 const roomTitle = `room${connectedRoom}`
                 const {publicState} = await leaveRoom(connectedRoom, connectedUser)

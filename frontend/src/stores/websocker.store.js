@@ -15,7 +15,8 @@ export default class WebsocketStore {
         user: {},
         bank: {}
     };
-
+    userBid= null;
+    waitForMove=false;
     constructor(rootStore) {
         makeAutoObservable(this, {rootStore: false});
         this.rootStore = rootStore;
@@ -24,17 +25,25 @@ export default class WebsocketStore {
     joinRoom = async (roomId, userId) => {
         socket.emit(SOCKET_EVENTS.JOIN_ROOM, roomId, userId)
     }
+    makeMove = async (roomId, userId, pass, bid,currentBid) => {
+        socket.emit(SOCKET_EVENTS.MAKE_MOVE, roomId, userId, pass, bid,currentBid)
+    }
     leaveRoom = async (roomId, userId) => {
         socket.emit(SOCKET_EVENTS.LEAVE_ROOM, roomId, userId)
     }
     onUpdateGameState = async (gameState) => {
         console.log(gameState)
         runInAction(() => {
+            const currentUser = gameState.players.find(player => player.user_id === rootStore.authStore.user.id)
+            this.userBid = currentUser?.bid;
+            this.waitForMove = currentUser?.waitForMove;
             gameState = {
                 ...gameState,
                 players: gameState.players.filter(player => player.user_id !== rootStore.authStore.user.id)
             }
             this.gameState = {...this.gameState, ...gameState}
+
+            console.log(this.userBid)
         })
     }
     onUpdatePlayerState = async (playerState) => {
@@ -56,4 +65,9 @@ socket.on(SOCKET_EVENTS.UPDATE_GAME_STATE, (gameState) => {
 socket.on(SOCKET_EVENTS.UPDATE_USER_PRIVATE, (playerState) => {
     console.log("Socket game state updated")
     rootStore.websocketStore.onUpdatePlayerState(playerState)
+});
+socket.on(SOCKET_EVENTS.UPDATE_USER, (user) => {
+    console.log("Socket userUpdated")
+    console.log(user)
+    rootStore.authStore.user = user
 });

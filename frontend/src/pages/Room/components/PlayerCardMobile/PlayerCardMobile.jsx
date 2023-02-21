@@ -9,7 +9,7 @@ import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 import {observer} from "mobx-react-lite";
 import {statusMap} from "stores/room.store";
 
-const PlayerCardMobile = ({player, status, cardsAmount, diraction, activeCard, disabled, timer, loading}) => {
+const PlayerCardMobile = ({player, status, cardsAmount, diraction, activeCard, disabled, timer, loading, bid}) => {
     let cards = [];
     for (let i = 0; i < cardsAmount; i++) {
         cards.push(i)
@@ -54,9 +54,12 @@ const PlayerCardMobile = ({player, status, cardsAmount, diraction, activeCard, d
             </div>
 
 
-            {activeCard && <div className={`player-active-card ${diractionClassMap[diraction]}`}>
-                <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>
-            </div>}
+            <div className={`player-active-card ${diractionClassMap[diraction]}`}>
+                {activeCard &&  <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>}
+                {bid ? <div className="player-card-bid">
+                    <div>{bid}</div>
+                    <CoinsIcon/></div> : ""}
+            </div>
         </div>
     );
 }

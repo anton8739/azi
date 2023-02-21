@@ -24,4 +24,6 @@ export const SOCKET_EVENTS = {
     UPDATE_GAME_STATE: 'updateGameState',
     UPDATE_USER_PRIVATE: 'updateUserPrivate',
     LEAVE_ROOM: 'leaveRoom',
+    MAKE_MOVE: 'makeMove',
+    UPDATE_USER: 'updateUser'
 }

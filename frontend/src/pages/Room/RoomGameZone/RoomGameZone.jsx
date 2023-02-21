@@ -13,34 +13,36 @@ import {useRoomStore, useWebsocketStore} from "stores";
 import WaitForPlayers from "pages/Room/components/WaitForPlayers/WaitForPlayers";
 import WaitForGameStart from "pages/Room/components/WaitForGameStart/WaitForGameStart";
 
-const RoomGameZone = ({gameState}) => {
+const RoomGameZone = ({gameState,waitForMove}) => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'));
-    const {players, user, bank} = gameState;
+    const {players, user, bank, currentBid} = gameState;
     return (
-        <div className="room-zone-container" >
+        <div className="room-zone-container">
             <WaitForPlayers status={gameState.wait_for_players}/>
             <WaitForGameStart status={!gameState.wait_for_players && !gameState.game_start}/>
-            <GameMove show={user.move?.status}/>
+            <GameMove show={waitForMove} type={user.move?.type} currentBid={currentBid}/>
             <AziOverlay status={user.azi}/>
             <ErrorModal open={user.error?.status} message={user.error?.message}/>
             <GameBank trumpCard={bank.trumpCard} bankBalance={bank.balance}/>
             {players.map((player, index) => !isMiddle ? <PlayerCard status={player.status}
-                                                        player={player.player}
-                                                        cardsAmount={player.cardsAmount}
-                                                        activeCard={player.activeCard}
-                                                        loading={player.loading}
-                                                        diraction={index}
-                                                        disabled={player.disabled}
-                                                        timer={player.timer}
+                                                                    player={player.player}
+                                                                    cardsAmount={player.cardsAmount}
+                                                                    activeCard={player.activeCard}
+                                                                    loading={player.waitForMove}
+                                                                    diraction={index}
+                                                                    disabled={player.disabled}
+                                                                    timer={15}
+                                                                    bid={player.bid}
             /> : <PlayerCardMobile
                 status={player.status}
                 player={player.player}
                 cardsAmount={player.cardsAmount}
                 activeCard={player.activeCard}
-                loading={player.loading}
+                loading={player.waitForMove}
                 diraction={index}
                 disabled={player.disabled}
-                timer={player.timer}
+                timer={15}
+                bid={player.bid}
             />)}
         </div>
     );

@@ -6,6 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         wait_for_players: true,
         starting: false,
         game_start: false,
+        currentBid: 0,
         deck: [],
         players : [],
         bank: {

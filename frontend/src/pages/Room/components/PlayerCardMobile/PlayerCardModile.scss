@@ -76,15 +76,15 @@
   .player-active-card {
     position: absolute;
     &.left {
-      bottom: -70px;
+      bottom: -100px;
       @media (max-width: 400px) {
-        bottom: -50px;
+        bottom: -70px;
       }
     }
     &.left-bottom {
-      bottom: -70px;
+      bottom: -100px;
       @media (max-width: 400px) {
-        bottom: -50px;
+        bottom: -70px;
       }
     }
     &.bottom {
@@ -112,6 +112,13 @@
       @media (max-width: 400px) {
         width: 25px;
       }
+    }
+    .player-card-bid {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
     }
   }
 }
