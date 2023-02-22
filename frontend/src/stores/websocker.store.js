@@ -17,6 +17,8 @@ export default class WebsocketStore {
     };
     userBid= null;
     waitForMove=false;
+    waitForGameMove=false;
+    activeCard = null;
     constructor(rootStore) {
         makeAutoObservable(this, {rootStore: false});
         this.rootStore = rootStore;
@@ -28,6 +30,9 @@ export default class WebsocketStore {
     makeMove = async (roomId, userId, pass, bid,currentBid) => {
         socket.emit(SOCKET_EVENTS.MAKE_MOVE, roomId, userId, pass, bid,currentBid)
     }
+    makeGameMove = async (roomId, userId,card) => {
+        socket.emit(SOCKET_EVENTS.MAKE_GAME_MOVE, roomId, userId, card)
+    }
     leaveRoom = async (roomId, userId) => {
         socket.emit(SOCKET_EVENTS.LEAVE_ROOM, roomId, userId)
     }
@@ -36,7 +41,9 @@ export default class WebsocketStore {
         runInAction(() => {
             const currentUser = gameState.players.find(player => player.user_id === rootStore.authStore.user.id)
             this.userBid = currentUser?.bid;
+            this.activeCard = currentUser?.activeCard;
             this.waitForMove = currentUser?.waitForMove;
+            this.waitForGameMove = currentUser?.waitForGameMove;
             gameState = {
                 ...gameState,
                 players: gameState.players.filter(player => player.user_id !== rootStore.authStore.user.id)

@@ -1,6 +1,6 @@
 const {Server} = require("socket.io");
-const {CONNECTION, JOIN_ROOM, UPDATE_GAME_STATE, UPDATE_USER_PRIVATE,LEAVE_ROOM,MAKE_MOVE} = require("./eventsTypes");
-const {joinRoom,leaveRoom,makeMove} = require('../service/index')
+const {CONNECTION, JOIN_ROOM, UPDATE_GAME_STATE, UPDATE_USER_PRIVATE,MAKE_GAME_MOVE,LEAVE_ROOM,MAKE_MOVE} = require("./eventsTypes");
+const {joinRoom,leaveRoom,makeMove,makeGameMove} = require('../service/index')
 module.exports = server => {
 
     const io = new Server(server, {
@@ -30,6 +30,13 @@ module.exports = server => {
         /*make move event*/
         socket.on(MAKE_MOVE, async (roomId, userId, pass, bid,currentBid ) => {
             await makeMove(roomId, userId,pass, bid,currentBid,io)
+            console.log(`Пользователь id=${userId} сделал ход в комнате id = ${roomId}`);
+
+        });
+        /*makeGameMove move event*/
+        socket.on(MAKE_GAME_MOVE, async (roomId, userId, card) => {
+            console.log("+++++")
+            await makeGameMove(roomId, userId,card,io)
             console.log(`Пользователь id=${userId} сделал ход в комнате id = ${roomId}`);
 
         });

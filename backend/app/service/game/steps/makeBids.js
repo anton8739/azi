@@ -21,5 +21,4 @@ module.exports = async (roomId,io) => {
         }
     }
     console.log("Все игроки сделали ставку")
-    //     await setGameState(roomId,game_state,io)
 }

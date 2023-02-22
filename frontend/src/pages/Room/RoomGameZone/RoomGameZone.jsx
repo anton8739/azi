@@ -28,7 +28,7 @@ const RoomGameZone = ({gameState,waitForMove}) => {
                                                                     player={player.player}
                                                                     cardsAmount={player.cardsAmount}
                                                                     activeCard={player.activeCard}
-                                                                    loading={player.waitForMove}
+                                                                    loading={player.waitForMove || player.waitForGameMove}
                                                                     diraction={index}
                                                                     disabled={player.disabled}
                                                                     timer={15}
@@ -38,7 +38,7 @@ const RoomGameZone = ({gameState,waitForMove}) => {
                 player={player.player}
                 cardsAmount={player.cardsAmount}
                 activeCard={player.activeCard}
-                loading={player.waitForMove}
+                loading={player.waitForMove || player.waitForGameMove}
                 diraction={index}
                 disabled={player.disabled}
                 timer={15}

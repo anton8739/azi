@@ -59,8 +59,10 @@ module.exports = async (roomId, io) => {
                         return player;
                     }
                 }),
-            ]
+            ],
+            bank: {...game_state.bank, trumpCard: shuffledDeck[cardCount]}
         }
+        cardCount=cardCount+1;
         game_state = {...game_state, deck: shuffledDeck.splice(cardCount, shuffledDeck.length - cardCount)}
         await setGameState(roomId, game_state, io)
     } catch (err) {

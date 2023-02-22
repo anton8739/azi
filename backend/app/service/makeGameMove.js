@@ -1,26 +1,25 @@
+const db = require("../models");
 const getGameState = require('./getGameState')
-module.exports = async (roomId, userId) => {
+const setGameState = require('./setGameState')
+const passMove = require('./passMove')
+const updateUserBalance = require('./updateUserBalance')
+const User = db.users;
+module.exports = async (roomId, userId, card, io) => {
     try {
         let game_state = await getGameState(roomId)
-        let leftPlayerBid = 0;
         game_state = {
             ...game_state,
             players: game_state.players.map(player => {
                 if (player.user_id === userId) {
-                    leftPlayerBid = player.bid
                     return {
                         ...player,
-                        waitForMove: false,
+                        cardsAmount: player.cardsAmount - 1,
+                        activeCard: card,
                         waitForGameMove: false,
-                        cardsAmount: 0,
-                        activeCard: null,
-                        disabled: true,
                         privateData: {
-                            ...player.privateData, cards: [], move: {
-
-                                type: null,
-                            },
-                        },
+                            ...player.privateData,
+                            cards: player.privateData.cards.filter(item => item.suit !== card.suit || item.value !== card.value)
+                        }
                     };
                 } else {
                     return player;
@@ -28,8 +27,8 @@ module.exports = async (roomId, userId) => {
 
             })
         }
-        game_state = {...game_state, bank: {balance: game_state.bank.balance + leftPlayerBid}}
-        return  game_state;
+
+        await setGameState(roomId, game_state, io)
     } catch (err) {
         console.log(err)
         return null;

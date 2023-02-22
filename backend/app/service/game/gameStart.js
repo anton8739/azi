@@ -3,6 +3,8 @@ const dealCards = require('./steps/dealCards')
 const getGameState = require('../getGameState')
 const setActivePlayers = require('./steps/setActivePlayers')
 const makeBids = require('./steps/makeBids')
+const formBank = require('./steps/formBank')
+const playGame= require('./steps/playGame')
 module.exports = async (roomId,io) => {
     let game_state =  await getGameState(roomId);
     try {
@@ -15,8 +17,16 @@ module.exports = async (roomId,io) => {
             await setActivePlayers(roomId,io)
             /*2-ой шаг раздачи карт*/
             await dealCards(roomId,io)
-            /*3-ий шаг игроки делаю ставки*/
+            /*3-ий шаг игроки делают ставки*/
             await makeBids(roomId,io)
+            /*4-ый формирование банка*/
+            await formBank(roomId, io)
+            /*5-ый шаг игра */
+            await playGame(roomId, io)
+            /*6-ый опеределение победителя на осовании взяток (5с отображение итогов игры) у всех игроков*/
+
+            /*7-ый рестарт игры*/
+
         }
 
     } catch (err) {

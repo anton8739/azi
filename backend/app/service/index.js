@@ -8,6 +8,7 @@ const setWaitForPlayers = require("./setWaitForPlayers")
 const gameStart = require("./game/gameStart")
 const gameSleep = require("./game/gameSleep")
 const makeMove= require("./makeMove")
+const makeGameMove= require('./makeGameMove')
 module.exports = {
     joinRoom,
     leaveRoom,
@@ -18,5 +19,6 @@ module.exports = {
     setWaitForPlayers,
     gameStart,
     gameSleep,
-    makeMove
+    makeMove,
+    makeGameMove
 };

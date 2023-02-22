@@ -25,6 +25,7 @@ module.exports = async (roomId,userId,io) => {
                     activeCard: null,
                     bid: 0,
                     waitForMove: false,
+                    waitForGameMove: false,
                     disabled: true,
                     privateData: {
                         azi: false,
