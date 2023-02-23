@@ -53,6 +53,21 @@
       }
     }
   }
+  .player-card-game-win {
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: green;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    padding: 4px;
+  }
   .player-card-status {
     border-radius: 4px;
     display: flex;

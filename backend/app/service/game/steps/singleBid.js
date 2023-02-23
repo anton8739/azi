@@ -41,7 +41,6 @@ module.exports = async (roomId, userId, io) => {
         while (waitCount > 0 && isWaiting) {
             await gameSleep(2000)
             game_state = await getGameState(roomId)
-           // console.log(game_state)
             isWaiting = game_state.players.find(player => player.user_id === userId)?.waitForMove;
             waitCount--;
             console.log(`Проверка походил ли игрок id=${userId} или нет`)

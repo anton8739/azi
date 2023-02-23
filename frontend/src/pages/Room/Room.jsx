@@ -17,7 +17,7 @@ import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 const Room = () => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'))
     const {setMute, user} = useAuthStore();
-    const {gameState,leaveRoom, userBid,waitForMove,waitForGameMove} = useWebsocketStore();
+    const {gameState,leaveRoom, userBid,waitForMove,waitForGameMove,userBribe,currentBalance,currentWinner} = useWebsocketStore();
     const {isConnected,joinRoom} = useWebsocketStore();
     const history = useHistory();
     const params = useParams();
@@ -45,14 +45,14 @@ const Room = () => {
                     <MuteIcon style={{width: iconSize, height: iconSize}} fill='#EBC57A'/>}
             </div>
             <div className="room-user-panel">
-                <UserHandCard cards={gameState.user.cards} waitForGameMove={waitForGameMove} bid={userBid}/>
+                <UserHandCard cards={gameState.user.cards} waitForGameMove={waitForGameMove} bid={userBid} bribe={userBribe} winner={currentWinner}/>
                 <div className="user-panel-menu">
                     {(waitForMove || waitForGameMove) && <div className='loader'>
                         <LoadingTimer size={40} isPlaying={true} timerValue={15}/>
                     </div>}
                     <div className="balance">
                         <div>
-                            {user.balance}
+                            {currentBalance}
                         </div>
                         <TengeIcon/>
                     </div>

@@ -20,22 +20,22 @@ module.exports = async (roomId,userId,io) => {
                 {
                     user_id : user.id,
                     status: 0,
-                    player: {name: user.username, balance: user.balance},
+                    name: user.username,
+                    balance: user.balance,
                     cardsAmount: 0,
                     activeCard: null,
                     bid: 0,
+                    bribe: null,
                     waitForMove: false,
                     waitForGameMove: false,
                     disabled: true,
+                    winner: {
+                        isWinner : false,
+                        amount : null,
+                    },
                     privateData: {
-                        azi: false,
                         move: {
                             type: null, // first | next
-                        },
-                        dropCard: false,
-                        error: {
-                            status: false,
-                            message: "Ошибка подключения к комнате"
                         },
                         cards: [],
                     }

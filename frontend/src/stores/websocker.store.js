@@ -16,9 +16,12 @@ export default class WebsocketStore {
         bank: {}
     };
     userBid= null;
+    userBribe= null;
     waitForMove=false;
     waitForGameMove=false;
     activeCard = null;
+    currentBalance = 0;
+    currentWinner = null;
     constructor(rootStore) {
         makeAutoObservable(this, {rootStore: false});
         this.rootStore = rootStore;
@@ -41,9 +44,12 @@ export default class WebsocketStore {
         runInAction(() => {
             const currentUser = gameState.players.find(player => player.user_id === rootStore.authStore.user.id)
             this.userBid = currentUser?.bid;
+            this.userBribe = currentUser?.bribe;
             this.activeCard = currentUser?.activeCard;
             this.waitForMove = currentUser?.waitForMove;
             this.waitForGameMove = currentUser?.waitForGameMove;
+            this.currentBalance = currentUser?.balance;
+            this.currentWinner= currentUser?.winner;
             gameState = {
                 ...gameState,
                 players: gameState.players.filter(player => player.user_id !== rootStore.authStore.user.id)
@@ -72,9 +78,4 @@ socket.on(SOCKET_EVENTS.UPDATE_GAME_STATE, (gameState) => {
 socket.on(SOCKET_EVENTS.UPDATE_USER_PRIVATE, (playerState) => {
     console.log("Socket game state updated")
     rootStore.websocketStore.onUpdatePlayerState(playerState)
-});
-socket.on(SOCKET_EVENTS.UPDATE_USER, (user) => {
-    console.log("Socket userUpdated")
-    console.log(user)
-    rootStore.authStore.user = user
 });

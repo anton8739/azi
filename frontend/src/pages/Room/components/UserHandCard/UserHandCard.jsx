@@ -6,7 +6,8 @@ import ButtonPrimary from "components /common/Button/ButtonPrimary /ButtonPrimar
 import CoinsIcon from "components /common/Icon/CoinsIcon";
 import {useAuthStore, useWebsocketStore} from "stores";
 import {useParams} from "react-router-dom";
-const UserHandCard = ({cards, waitForGameMove, bid}) => {
+import BribeIcon from "components /common/Icon/BribeIcon";
+const UserHandCard = ({cards, waitForGameMove, bid,bribe,winner}) => {
     const [selectedCard, setActiveCard] = useState(null);
     const {makeGameMove, activeCard} = useWebsocketStore();
     const params = useParams();
@@ -22,6 +23,11 @@ const UserHandCard = ({cards, waitForGameMove, bid}) => {
             <div className="move-btn">
                 {activeCard && <div className="active-hand-card"><img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/></div>}
                 {bid ? <div className="bid-user-hand"><div>{bid}</div><CoinsIcon/></div> : ""}
+                {bribe ? <div className="bid-user-hand"><div>{bribe}</div><BribeIcon fill='#FFFFFF'/></div> : ""}
+                {winner?.isWinner && <div className="player-card-game-win">
+                    <div>Выигрыш:</div>
+                    <div>{winner.amount}</div>
+                </div>}
                 {waitForGameMove &&   <ButtonPrimary onClick={dropCard}>Походить</ButtonPrimary>}
             </div>
 

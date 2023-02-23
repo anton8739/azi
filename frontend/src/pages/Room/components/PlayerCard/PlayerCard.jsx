@@ -8,8 +8,10 @@ import {cardImageMap} from "utils/cardMap";
 import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 import {observer} from "mobx-react-lite";
 import {statusMap} from "stores/room.store";
+import BribeIcon from "components /common/Icon/BribeIcon";
 
-const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disabled, timer, loading, bid}) => {
+const PlayerCard = ({player, diraction,timer,loading }) => {
+    const {status,cardsAmount,activeCard,disabled,bid,bribe, winner, balance, name } = player;
     let cards = [];
     for (let i = 0; i < cardsAmount; i++) {
         cards.push(i)
@@ -25,16 +27,20 @@ const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disable
     }
     return (
         <div className={`player-card ${diractionClassMap[diraction]} ${disabled && "disabled"}`}>
+            {winner?.isWinner && <div className="player-card-game-win">
+                <div>Выигрыш:</div>
+                <div>{winner.amount}</div>
+            </div>}
             <div className="player-info">
                 {loading ? <LoadingTimer size={35} timerValue={timer} isPlaying={loading}/> :
                     <Avatar size={35} icon={<img src={icon}/>}/>}
                 <div className="player-info-content">
                     <div className="player-name">
-                        <div>{player.name}</div>
+                        <div>{name}</div>
                     </div>
                     <div className="player-balance">
                         <div>
-                            {player.balance}
+                            {balance}
                         </div>
                         <CoinsIcon/>
                     </div>
@@ -53,10 +59,14 @@ const PlayerCard = ({player, status, cardsAmount, diraction, activeCard, disable
                 {statusMap[status]}
             </div>
             <div className={`player-active-card ${diractionClassMap[diraction]}`}>
-                {activeCard && <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>}
                 {bid ? <div className="player-card-bid">
                     <div>{bid}</div>
                     <CoinsIcon/></div> : ""}
+                {bribe ? <div className="player-card-bid">
+                    <div>{bribe}</div><BribeIcon fill='#FFFFFF'/>
+                </div> : ""}
+                {activeCard && <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>}
+
             </div>
 
         </div>

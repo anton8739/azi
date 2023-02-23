@@ -15,6 +15,7 @@ module.exports = async (roomId, userId) => {
                         cardsAmount: 0,
                         activeCard: null,
                         disabled: true,
+                        status: 0,
                         privateData: {
                             ...player.privateData, cards: [], move: {
 

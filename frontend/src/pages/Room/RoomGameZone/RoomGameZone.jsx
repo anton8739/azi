@@ -24,25 +24,18 @@ const RoomGameZone = ({gameState,waitForMove}) => {
             <AziOverlay status={user.azi}/>
             <ErrorModal open={user.error?.status} message={user.error?.message}/>
             <GameBank trumpCard={bank.trumpCard} bankBalance={bank.balance}/>
-            {players.map((player, index) => !isMiddle ? <PlayerCard status={player.status}
-                                                                    player={player.player}
-                                                                    cardsAmount={player.cardsAmount}
-                                                                    activeCard={player.activeCard}
+            {players.map((player, index) => !isMiddle ? <PlayerCard
+                                                                    player={player}
                                                                     loading={player.waitForMove || player.waitForGameMove}
                                                                     diraction={index}
-                                                                    disabled={player.disabled}
                                                                     timer={15}
-                                                                    bid={player.bid}
+
             /> : <PlayerCardMobile
-                status={player.status}
-                player={player.player}
-                cardsAmount={player.cardsAmount}
-                activeCard={player.activeCard}
+                player={player}
                 loading={player.waitForMove || player.waitForGameMove}
                 diraction={index}
-                disabled={player.disabled}
                 timer={15}
-                bid={player.bid}
+
             />)}
         </div>
     );

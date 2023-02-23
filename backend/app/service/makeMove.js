@@ -18,6 +18,7 @@ module.exports = async (roomId, userId, pass, bid,currentBid, io) => {
             const newUserBalance = user.balance - bid;
             await updateUserBalance(userId,newUserBalance, io)
             // обновить state user/ waitMove: false  и bid: +bid
+            const status = currentBid === game_state.currentBid ? 2 : 1;
             game_state = {
                 ...game_state,
                 currentBid: currentBid,
@@ -25,6 +26,8 @@ module.exports = async (roomId, userId, pass, bid,currentBid, io) => {
                     if (player.user_id === userId) {
                         return {
                             ...player,
+                            status: status,
+                            balance: newUserBalance,
                             bid: player.bid + bid,
                             waitForMove: false,
                         };
