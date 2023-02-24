@@ -43,7 +43,7 @@ module.exports = server => {
         /*leave room event*/
         socket.on(LEAVE_ROOM, async (roomId,userId) => {
             const roomTitle = `room${roomId}`
-            const {publicState} = await leaveRoom(roomId, userId)
+            const {publicState} = await leaveRoom(roomId, userId,io)
             console.log(`User leaved room ${roomId}`);
             connectedUser = null;
             connectedRoom = null;
@@ -55,7 +55,7 @@ module.exports = server => {
         socket.on('disconnect', async () => {
             if (connectedUser && connectedRoom) {
                 const roomTitle = `room${connectedRoom}`
-                const {publicState} = await leaveRoom(connectedRoom, connectedUser)
+                const {publicState} = await leaveRoom(connectedRoom, connectedUser,io)
                 console.log(`User leaved room ${connectedRoom}`);
                 io.to(roomTitle).emit(UPDATE_GAME_STATE, publicState);
                 connectedUser = null;

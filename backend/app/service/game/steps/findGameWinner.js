@@ -1,6 +1,8 @@
 const getGameState = require("../../getGameState");
 const setGameState = require("../../setGameState");
 const updateUserBalance = require("../../updateUserBalance");
+const updateUserScore = require('../../updateUserScore')
+const updateUserGames = require('../../updateUserGames')
 const db = require("../../../models");
 const User = db.users;
 module.exports = async (roomId, io) => {
@@ -9,7 +11,9 @@ module.exports = async (roomId, io) => {
     if (activePlayers.length > 1) {
         let winners = [];
         // определение победителей.
-        activePlayers.forEach(player => {
+        for (const player of activePlayers) {
+            const user = await User.findByPk(player.user_id)
+            await updateUserGames(user.dataValues.id, user.dataValues.games + 1, io)
             if (winners.length < 1) {
                 winners = [player];
             } else if (winners[0].bribe < player.bribe) {
@@ -17,13 +21,14 @@ module.exports = async (roomId, io) => {
             } else if (winners[0].bribe === player.bribe) {
                 winners.push(player)
             }
-        })
+        }
         const winPerPlayer = game_state.bank.balance / winners.length;
         // начисление каждому игроку выигрыша.
         for (const winner of winners) {
             const user = await User.findByPk(winner.user_id)
-            const newUserBalance = user.balance + winPerPlayer;
-            await updateUserBalance(user.id, newUserBalance, io)
+            const newUserBalance = user.dataValues.balance + winPerPlayer;
+            await updateUserBalance(user.dataValues.id, newUserBalance, io)
+            await updateUserScore(user.dataValues.id, user.dataValues.score + 1, io)
         }
         // отобразить выигрыш игрока / очистка банка
         game_state = {

@@ -2,11 +2,6 @@
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
-        id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
         username: {
             type: Sequelize.STRING
         },
@@ -17,19 +12,24 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         score: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         games: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         balance: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 10000
         },
         active: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
         mute: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     });
 

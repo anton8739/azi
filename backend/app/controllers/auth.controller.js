@@ -10,6 +10,9 @@ let bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
     // Save User to Database
+    console.log(req.body.email)
+    console.log(req.body.username)
+    console.log(bcrypt.hashSync(req.body.password, 8))
     User.create({
         email: req.body.email,
         username: req.body.username,
@@ -17,16 +20,19 @@ exports.signup = (req, res) => {
         password: bcrypt.hashSync(req.body.password, 8)
     })
         .then(user => {
-            res.send({ message: "Пользователь успешно зарегистрирован" });
+            console.log(user)
+            res.send({message: "Пользователь успешно зарегистрирован"});
         })
         .catch(err => {
-            res.status(500).send({ message: err.message });
+            console.log("!!!!!!!")
+            console.log(err)
+            res.status(500).send({message: err.message});
         });
 };
 
 exports.signin = (req, res) => {
 
-    if (!req.body.email ||  !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         return res.status(400).send({
             message: "Email и пароль обязательные поля"
         });
@@ -38,7 +44,7 @@ exports.signin = (req, res) => {
     })
         .then(user => {
             if (!user) {
-                return res.status(404).send({ message: "Пользователь не найден" });
+                return res.status(404).send({message: "Пользователь не найден"});
             }
 
             let passwordIsValid = bcrypt.compareSync(
@@ -53,7 +59,7 @@ exports.signin = (req, res) => {
                 });
             }
 
-            let token = jwt.sign({ id: user.id }, config.secret, {
+            let token = jwt.sign({id: user.id}, config.secret, {
                 expiresIn: 86400 // 24 hours
             });
             delete user.dataValues.password
@@ -63,7 +69,7 @@ exports.signin = (req, res) => {
             });
         })
         .catch(err => {
-            res.status(500).send({ message: err.message });
+            res.status(500).send({message: err.message});
         });
 };
 
@@ -74,7 +80,7 @@ exports.checkAuth = (req, res) => {
             id: req.userId
         }
     }).then(user => {
-        let token = jwt.sign({ id: user.id }, config.secret, {
+        let token = jwt.sign({id: user.id}, config.secret, {
             expiresIn: 86400 // 24 hours
         });
         delete user.dataValues.password
@@ -83,6 +89,6 @@ exports.checkAuth = (req, res) => {
             accessToken: token
         });
     }).catch(err => {
-        res.status(500).send({ message: err.message });
+        res.status(500).send({message: err.message});
     });
 };

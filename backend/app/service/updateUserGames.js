@@ -1,8 +1,8 @@
 const db = require("../models");
 const User = db.users;
-module.exports = async (userId, balance) => {
+module.exports = async (userId, games) => {
     try {
-        await User.update({balance: balance}, {
+        await User.update({games: games}, {
             where: { id: userId }
         })
     } catch (err) {

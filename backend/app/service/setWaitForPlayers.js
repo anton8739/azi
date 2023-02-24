@@ -1,3 +1,4 @@
+
 module.exports = (game_state) => {
     try {
         if (game_state.players.length < 2) {

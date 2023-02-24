@@ -48,15 +48,16 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a Tutorial
+    // Create a Room
+    console.log(req.body.password)
     const room = {
         name: req.body.name,
         players_limit: req.body.players_limit,
         bid: req.body.bid,
         locked: req.body.locked || false,
-        password: req.body.password,
+        password: bcrypt.hashSync(req.body.password, 8),
     };
-    // Save Tutorial in the database
+    // Save Room in the database
     Room.create(room)
         .then(data => {
          //   delete data.dataValues.password;
