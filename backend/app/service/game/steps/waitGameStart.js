@@ -6,7 +6,7 @@ module.exports = async (roomId,io) => {
     if (game_state.players.length > 1 && !game_state.starting) {
         game_state = {...game_state, starting: true}
         await setGameState(roomId,game_state,io)
-        await gameSleep(10000)
+        await gameSleep(5000)
         try {
             let game_state = await getGameState(roomId)
             if (game_state.players.length > 1) {

@@ -9,6 +9,10 @@ class RoomApi {
         const url = "api/rooms"
         return await BaseApi.get(url);
     }
+    loadSingleRoom = async (id) => {
+        const url = `api/rooms/${id}`
+        return await BaseApi.get(url);
+    }
     createRoom = async (data) => {
         const url = "api/rooms"
         return await BaseApi.post(url, data);

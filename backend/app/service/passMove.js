@@ -15,6 +15,7 @@ module.exports = async (roomId, userId) => {
                         cardsAmount: 0,
                         activeCard: null,
                         disabled: true,
+                        bid:0,
                         status: 0,
                         privateData: {
                             ...player.privateData, cards: [], move: {
@@ -29,7 +30,7 @@ module.exports = async (roomId, userId) => {
 
             })
         }
-        game_state = {...game_state, bank: {balance: game_state.bank.balance + leftPlayerBid}}
+        game_state = {...game_state, bank: {...game_state.bank, balance: game_state.bank.balance + leftPlayerBid}}
         return  game_state;
     } catch (err) {
         console.log(err)

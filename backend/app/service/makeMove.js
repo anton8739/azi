@@ -38,7 +38,6 @@ module.exports = async (roomId, userId, pass, bid,currentBid, io) => {
                 })
             }
         }
-
         await setGameState(roomId, game_state, io)
     } catch (err) {
         console.log(err)

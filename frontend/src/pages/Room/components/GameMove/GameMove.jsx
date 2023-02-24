@@ -3,10 +3,12 @@ import './GameMove.scss'
 import ButtonPrimary from "components /common/Button/ButtonPrimary /ButtonPrimary";
 import ButtonSecondary from "components /common/Button/ButtonSecondary/ButtonSecondary";
 import {Slider} from "antd";
-import {useAuthStore, useWebsocketStore} from "stores";
+import {useAuthStore, useRoomStore, useWebsocketStore} from "stores";
 import {useParams} from "react-router-dom";
-const GameMove = ({type, show, currentBid}) => {
+import {observer} from "mobx-react-lite";
+const GameMove = ({type, show, currentBid,maxBid}) => {
     const {makeMove,userBid} = useWebsocketStore();
+
     const {user} = useAuthStore();
     const params = useParams();
     const [value, setValue] = useState(20)
@@ -37,6 +39,7 @@ const GameMove = ({type, show, currentBid}) => {
                                 trackStyle={{background: "#E29A0C"}}
                                 railStyle={{background: "rgba(0, 0, 0, 0.4)"}}
                                 handleStyle={{background: "#E29A0C"}}
+                                max={maxBid || 100}
                         />
                     </div>
                     {type ==="first" && <div className="game-move-actions">
@@ -67,4 +70,4 @@ const GameMove = ({type, show, currentBid}) => {
     );
 }
 
-export default GameMove;
+export default observer(GameMove);

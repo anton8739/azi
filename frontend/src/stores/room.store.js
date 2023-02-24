@@ -10,7 +10,7 @@ export const statusMap = {
 export default class RoomStore {
 
     rooms= [];
-
+    currnetRoom = null;
     gameState = {
         players : [{
             user_id : 1,
@@ -95,7 +95,17 @@ export default class RoomStore {
         makeAutoObservable(this, {rootStore: false});
         this.rootStore = rootStore;
     }
+    loadSingleRoom = async (id) => {
+        const response = await RoomApi.loadSingleRoom(id);
+        if (response.isError) {
+            notifier({ description: response.shownMessage || response.message, type: 'error' });
 
+        } else {
+            runInAction(() => {
+                this.currnetRoom = response.data
+            })
+        }
+    }
     loadRooms = async () => {
         const response = await RoomApi.loadRooms();
         if (response.isError) {

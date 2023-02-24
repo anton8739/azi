@@ -3,8 +3,9 @@ const setGameState = require("../setGameState");
 module.exports = async (roomId,io) => {
     let game_state = await getGameState(roomId)
     game_state = {...game_state,
+        wait_for_players: game_state.players.length < 1,
         starting: false,
-        game_start: false,
+        game_start: game_state.players.length > 1,
         currentBid: 0,
         deck: [],
         bank: {
@@ -15,6 +16,7 @@ module.exports = async (roomId,io) => {
             return {
                 ...player,
                 status: 0,
+                disabled: true,
                 cardsAmount: 0,
                 activeCard: null,
                 bid: 0,

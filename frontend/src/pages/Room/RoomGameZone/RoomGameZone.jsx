@@ -13,14 +13,14 @@ import {useRoomStore, useWebsocketStore} from "stores";
 import WaitForPlayers from "pages/Room/components/WaitForPlayers/WaitForPlayers";
 import WaitForGameStart from "pages/Room/components/WaitForGameStart/WaitForGameStart";
 
-const RoomGameZone = ({gameState,waitForMove}) => {
+const RoomGameZone = ({gameState,waitForMove, maxBid}) => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'));
     const {players, user, bank, currentBid} = gameState;
     return (
         <div className="room-zone-container">
             <WaitForPlayers status={gameState.wait_for_players}/>
             <WaitForGameStart status={!gameState.wait_for_players && !gameState.game_start}/>
-            <GameMove show={waitForMove} type={user.move?.type} currentBid={currentBid}/>
+            <GameMove show={waitForMove} type={user.move?.type} currentBid={currentBid} maxBid={maxBid}/>
             <AziOverlay status={user.azi}/>
             <ErrorModal open={user.error?.status} message={user.error?.message}/>
             <GameBank trumpCard={bank.trumpCard} bankBalance={bank.balance}/>

@@ -9,7 +9,7 @@ const WaitForGameStart = ({status}) => {
                 <div>
                     Ожидайте начала игры!
                 </div>
-                <LoadingTimer size={35} isPlaying={true} timerValue={10}/>
+                <LoadingTimer size={35} isPlaying={true} timerValue={3}/>
             </div>}
         </>
     );

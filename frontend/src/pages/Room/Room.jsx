@@ -17,8 +17,8 @@ import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 const Room = () => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'))
     const {setMute, user} = useAuthStore();
-    const {gameState,leaveRoom, userBid,waitForMove,waitForGameMove,userBribe,currentBalance,currentWinner} = useWebsocketStore();
-    const {isConnected,joinRoom} = useWebsocketStore();
+    const {loadSingleRoom,currnetRoom} = useRoomStore();
+    const {gameState,leaveRoom, userBid,waitForMove,waitForGameMove,userBribe,currentBalance,currentWinner, joinRoom} = useWebsocketStore();
     const history = useHistory();
     const params = useParams();
     const leaveCurrentRoom = () => {
@@ -34,6 +34,9 @@ const Room = () => {
         }
     }, [])
     const iconSize = !isMiddle ? '48px' : '24px';
+    useEffect(() => {
+        loadSingleRoom(params.id)
+    }, [])
     return (
         <div className="room-wrapper" style={{backgroundImage: `url(${isMiddle ? bgSmall : bgBig})`}}>
             
@@ -58,7 +61,7 @@ const Room = () => {
                     </div>
                 </div>
             </div>
-            <RoomGameZone gameState={gameState} waitForMove={waitForMove}/>
+            <RoomGameZone gameState={gameState} waitForMove={waitForMove} maxBid={200}/>
         </div>
     );
 }
