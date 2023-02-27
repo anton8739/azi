@@ -4,7 +4,11 @@ const Room = db.rooms;
 
 
 exports.findAll = (req, res) => {
-    Room.findAll()
+    Room.findAll({
+        where: {
+            locked: req.query.locked || false
+        },
+    })
         .then(data => {
             const result = data.map(item => {
                 delete item.dataValues.password;
@@ -49,7 +53,6 @@ exports.create = (req, res) => {
     }
 
     // Create a Room
-    console.log(req.body.password)
     const room = {
         name: req.body.name,
         players_limit: req.body.players_limit,

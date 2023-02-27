@@ -3,6 +3,7 @@ import './RoomCard.scss'
 import LockIcon from "components /common/Icon/LockIcon";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "utils/routes";
+import {observer} from "mobx-react-lite";
 
 const RoomCard = ({room}) => {
     const history = useHistory();
@@ -36,4 +37,4 @@ const RoomCard = ({room}) => {
     );
 }
 
-export default RoomCard;
+export default observer(RoomCard);

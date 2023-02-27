@@ -7,8 +7,9 @@ const findGameWinner= require('./findGameWinner')
 module.exports = async (roomId,io) => {
     let game_state = await getGameState(roomId)
     const activePlayers = game_state.players.filter(player => !player.disabled)
+
     if (activePlayers.length > 1) {
-        game_state = {...game_state, moveOrder: [...activePlayers.map(player => player.user_id)], players : game_state.players.map(player => {
+        game_state = {...game_state, players : game_state.players.map(player => {
                 return {
                     ...player,
                     status: 0,

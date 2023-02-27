@@ -106,8 +106,8 @@ export default class RoomStore {
             })
         }
     }
-    loadRooms = async () => {
-        const response = await RoomApi.loadRooms();
+    loadRooms = async (locked) => {
+        const response = await RoomApi.loadRooms(locked);
         if (response.isError) {
             notifier({ description: response.shownMessage || response.message, type: 'error' });
 

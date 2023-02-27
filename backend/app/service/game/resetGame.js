@@ -2,11 +2,19 @@ const getGameState = require("../getGameState");
 const setGameState = require("../setGameState");
 module.exports = async (roomId,io) => {
     let game_state = await getGameState(roomId)
+    let firstMoveId = game_state.firstMoveId;
+    if (firstMoveId >=5) {
+        firstMoveId = 0;
+    } else {
+        firstMoveId = firstMoveId +1;
+    }
     game_state = {...game_state,
-        wait_for_players: game_state.players.length < 1,
+        wait_for_players: game_state.players.length < 2,
         starting: false,
         game_start: game_state.players.length > 1,
         currentBid: 0,
+        firstMoveId: firstMoveId,
+        moveOrder: [],
         deck: [],
         bank: {
             trumpCard: null,

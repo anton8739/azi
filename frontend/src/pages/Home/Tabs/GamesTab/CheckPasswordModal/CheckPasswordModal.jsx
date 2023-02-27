@@ -6,6 +6,7 @@ import CheckRoomPasswordForm
     from "pages/Home/Tabs/GamesTab/CheckPasswordModal/CheckRoomPasswordForm/CheckRoomPasswordForm";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "utils/routes";
+import {observer} from "mobx-react-lite";
 
 const CheckPasswordModal = ({Trigger, room}) => {
     const history = useHistory();
@@ -45,4 +46,4 @@ const CheckPasswordModal = ({Trigger, room}) => {
     );
 }
 
-export default CheckPasswordModal;
+export default observer(CheckPasswordModal);

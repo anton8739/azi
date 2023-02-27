@@ -1,0 +1,25 @@
+.game-tab-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px 0px 0px 4px;
+
+  .game-tab-switch-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    border: 1px solid #EBC57A;
+    color: #FFFFFF;
+    height: 30px;
+    cursor: pointer;
+
+    &.active {
+      background: #EBC57A;
+      cursor: unset;
+    }
+  }
+}

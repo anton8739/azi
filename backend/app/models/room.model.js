@@ -6,6 +6,8 @@ module.exports = (sequelize, Sequelize) => {
         wait_for_players: true,
         starting: false,
         game_start: false,
+        moveOrder: [],
+        firstMoveId: 0, // 0 - 6
         currentBid: 0,
         deck: [],
         players : [],
@@ -41,7 +43,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         locked: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
         game_state: {
             type: Sequelize.DataTypes.JSON,

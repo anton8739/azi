@@ -5,8 +5,8 @@ class RoomApi {
         this.client = client;
     }
 
-    loadRooms = async () => {
-        const url = "api/rooms"
+    loadRooms = async (locked) => {
+        const url = `api/rooms?locked=${locked}`
         return await BaseApi.get(url);
     }
     loadSingleRoom = async (id) => {

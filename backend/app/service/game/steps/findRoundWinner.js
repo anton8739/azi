@@ -15,7 +15,6 @@ module.exports = async (roomId,io) => {
     const trumpCard = game_state.bank.trumpCard;
     for (let i=1; i<cardsArray.length; i++) {
         const currentCard = cardsArray[i];
-        console.log(currentCard)
         //карты одной масти и текущая карта старше
         if (currentCard.card.suit === winCard.card.suit && currentCard.card.value > winCard.card.value){
             winCard = currentCard;
@@ -38,11 +37,13 @@ module.exports = async (roomId,io) => {
         }
         })}
     //3. Создание нового порядка хода
-    const firstPlayer = winCard.user_id
-    const activePlayersIds = activePlayers.map(player => player.user_id)
-    const firstPlayerIndex = activePlayersIds.findIndex(el => el === firstPlayer);
-    const newMoveOrder = [...activePlayersIds.slice(firstPlayerIndex), ...activePlayersIds.slice(0,firstPlayerIndex)];
-    game_state = {...game_state, moveOrder: newMoveOrder}
+    if (winCard) {
+        const firstPlayer = winCard.user_id
+        const activePlayersIds = activePlayers.map(player => player.user_id)
+        const firstPlayerIndex = activePlayersIds.findIndex(el => el === firstPlayer);
+        const newMoveOrder = [...activePlayersIds.slice(firstPlayerIndex), ...activePlayersIds.slice(0,firstPlayerIndex)];
+        game_state = {...game_state, moveOrder: newMoveOrder}
+    }
     await setGameState(roomId, game_state, io)
     console.log("Определен победитель раунда / установлен новый порядок")
 }
