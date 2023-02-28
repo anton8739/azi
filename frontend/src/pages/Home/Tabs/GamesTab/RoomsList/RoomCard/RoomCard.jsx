@@ -6,19 +6,9 @@ import {RouteNames} from "utils/routes";
 import {observer} from "mobx-react-lite";
 
 const RoomCard = ({room, onClick}) => {
-    const history = useHistory();
-    const openRoom = () => {
-        if (!room.locked) {
-            history.push({
-                pathname: `${RouteNames.ROOM}/${room.id}`,
-                state: {
-                    auth: true
-                }
-            })
-        }
-    }
+
     return (
-        <div className="room-card" onClick={openRoom} onClick={onClick}>
+        <div className="room-card" onClick={onClick}>
             <div className="title">
                 {room.name}
                 {room.locked && <LockIcon fill='#E9B95B'/>}
