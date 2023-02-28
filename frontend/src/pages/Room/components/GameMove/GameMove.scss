@@ -12,6 +12,7 @@
     height: 40%;
     display: flex;
     flex-direction: column;
+    gap: 20px;
     max-height: 300px;
     @media (max-width: 1000px) {
       width: 60%;
@@ -38,6 +39,8 @@
     align-self: center;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
   }
 }

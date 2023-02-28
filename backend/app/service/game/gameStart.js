@@ -9,8 +9,8 @@ const gameSleep = require('./gameSleep')
 const resetGame = require('./resetGame')
 module.exports = async (roomId, io) => {
     const game_state = await getGameState(roomId);
+    await gameSleep(2000)
     let players = game_state.players
-    console.log(players)
     /*шаг старта игры при подключении достаточного кол-ва игроков*/
     let startGame = await waitGameStart(roomId, io)
     while (startGame) {

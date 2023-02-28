@@ -27,6 +27,7 @@ const CreateRoomForm = ({handleOk}) => {
         const submit = async values => {
             try {
                 setLoading(true)
+                console.log(values)
                 await createRoom(values)
                 handleOk()
                 setLoading(false)

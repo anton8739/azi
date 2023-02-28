@@ -5,27 +5,9 @@
   width: 400px;
   height: 200px;
   overflow: hidden;
-  .move-btn {
-    margin-left: auto;
-    width: fit-content;
-    display: flex;
-    gap: 10px;
-    .player-card-game-win {
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      background: green;
-      font-weight: 700;
-      font-size: 10px;
-      line-height: 10px;
-      text-align: center;
-      text-transform: capitalize;
-      color: #FFFFFF;
-      padding: 4px;
-    }
-  }
+  display: flex;
+  gap: 5px;
+  align-items: center;
   @media (max-width: 767px) {
     width: 200px;
     height: 150px;
@@ -104,14 +86,63 @@
   .item.active:hover {
     cursor: pointer;
   }
-  .bid-user-hand {
+
+}
+.user-panel-menu {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  @media (max-width: 767px) {
+    bottom: 10px;
+    right: 10px;
+  }
+  .balance-wp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .balance {
     display: flex;
     align-items: center;
     gap: 5px;
   }
-  .active-hand-card {
-    img {
-      width: 42px;
+  .user-card-move-btn {
+    margin-left: auto;
+    width: fit-content;
+    display: flex;
+    gap: 10px;
+    .bid-user-hand {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .active-hand-card {
+      img {
+        width: 42px;
+      }
+    }
+    .player-card-game-win {
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: green;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 10px;
+      text-align: center;
+      text-transform: capitalize;
+      color: #FFFFFF;
+      padding: 4px;
     }
   }
 }

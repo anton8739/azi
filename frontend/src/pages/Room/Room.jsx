@@ -14,15 +14,26 @@ import {RouteNames} from "utils/routes";
 import TengeIcon from "components /common/Icon/TengeIcon";
 import UserHandCard from "pages/Room/components/UserHandCard/UserHandCard";
 import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
+
 const Room = () => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'))
     const {setMute, user} = useAuthStore();
-    const {loadSingleRoom,currnetRoom} = useRoomStore();
-    const {gameState,leaveRoom, userBid,waitForMove,waitForGameMove,userBribe,currentBalance,currentWinner, joinRoom} = useWebsocketStore();
+    const {loadSingleRoom, currnetRoom} = useRoomStore();
+    const {
+        gameState,
+        leaveRoom,
+        userBid,
+        waitForMove,
+        waitForGameMove,
+        userBribe,
+        currentBalance,
+        currentWinner,
+        joinRoom
+    } = useWebsocketStore();
     const history = useHistory();
     const params = useParams();
     const leaveCurrentRoom = () => {
-        leaveRoom(params.id,user.id)
+        leaveRoom(params.id, user.id)
         history.push(RouteNames.HOME)
     }
     useEffect(() => {
@@ -39,7 +50,7 @@ const Room = () => {
     }, [])
     return (
         <div className="room-wrapper" style={{backgroundImage: `url(${isMiddle ? bgSmall : bgBig})`}}>
-            
+
             <div className="room-leave-btn" onClick={leaveCurrentRoom}>
                 <LeaveIcon style={{width: iconSize, height: iconSize}} fill='#EBC57A'/>
             </div>
@@ -48,18 +59,12 @@ const Room = () => {
                     <MuteIcon style={{width: iconSize, height: iconSize}} fill='#EBC57A'/>}
             </div>
             <div className="room-user-panel">
-                <UserHandCard cards={gameState.user.cards} waitForGameMove={waitForGameMove} bid={userBid} bribe={userBribe} winner={currentWinner}/>
-                <div className="user-panel-menu">
-                    {(waitForMove || waitForGameMove) && <div className='loader'>
-                        <LoadingTimer size={40} isPlaying={true} timerValue={15}/>
-                    </div>}
-                    <div className="balance">
-                        <div>
-                            {currentBalance}
-                        </div>
-                        <TengeIcon/>
-                    </div>
-                </div>
+                <UserHandCard cards={gameState.user.cards} waitForGameMove={waitForGameMove} bid={userBid}
+                              bribe={userBribe} winner={currentWinner}
+                              currentBalance={currentBalance}
+                              waitForMove={waitForMove}
+                />
+
             </div>
             <RoomGameZone gameState={gameState} waitForMove={waitForMove} maxBid={200}/>
         </div>

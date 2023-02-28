@@ -25,10 +25,12 @@ module.exports = async (roomId, io) => {
         const winPerPlayer = game_state.bank.balance / winners.length;
         // начисление каждому игроку выигрыша.
         for (const winner of winners) {
-            const user = await User.findByPk(winner.user_id)
-            const newUserBalance = user.dataValues.balance + winPerPlayer;
-            await updateUserBalance(user.dataValues.id, newUserBalance, io)
-            await updateUserScore(user.dataValues.id, user.dataValues.score + 1, io)
+            if (winner) {
+                const user = await User.findByPk(winner.user_id)
+                const newUserBalance = user.dataValues.balance + winPerPlayer;
+                await updateUserBalance(user.dataValues.id, newUserBalance, io)
+                await updateUserScore(user.dataValues.id, user.dataValues.score + 1, io)
+            }
         }
         // отобразить выигрыш игрока / очистка банка
         game_state = {

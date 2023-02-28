@@ -6,7 +6,7 @@ export const baseUserColumns = [
         dataIndex: 'index',
         key: 'index',
         render: userPositionCell,
-        width: '100px',
+        maxWidth: '100px',
     },
     {
         title: 'Игрок',

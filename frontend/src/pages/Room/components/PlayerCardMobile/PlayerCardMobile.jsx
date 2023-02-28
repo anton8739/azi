@@ -37,11 +37,16 @@ const PlayerCardMobile = ({player, diraction,loading,  timer }) => {
                     <div className="player-name">
                         <div>{name}</div>
                     </div>
-                    <div className="player-balance">
-                        <div>
-                            {balance}
+                    <div className="player-label">
+                        <div className="player-balance">
+                            <div>
+                                {balance}
+                            </div>
+                            <CoinsIcon/>
                         </div>
-                        <CoinsIcon/>
+                        {bribe ? <div className="player-card-bribe">
+                            <div>{bribe}</div>
+                            <BribeIcon fill='#FFFFFF'/></div> : ""}
                     </div>
                     <div className="player-card-status"
                          style={{display: !!status ? "flex" : "none", background: statusBg}}>
@@ -64,9 +69,6 @@ const PlayerCardMobile = ({player, diraction,loading,  timer }) => {
                 {bid ? <div className="player-card-bid">
                     <div>{bid}</div>
                     <CoinsIcon/></div> : ""}
-                {bribe ? <div className="player-card-bid">
-                    <div>{bribe}</div>
-                    <BribeIcon fill='#FFFFFF'/></div> : ""}
                 {activeCard &&  <img src={cardImageMap[activeCard.suit][activeCard.value]} alt='card'/>}
 
             </div>

@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {RouteNames} from "utils/routes";
 import {observer} from "mobx-react-lite";
 
-const RoomCard = ({room}) => {
+const RoomCard = ({room, onClick}) => {
     const history = useHistory();
     const openRoom = () => {
         if (!room.locked) {
@@ -18,7 +18,7 @@ const RoomCard = ({room}) => {
         }
     }
     return (
-        <div className="room-card" onClick={openRoom}>
+        <div className="room-card" onClick={openRoom} onClick={onClick}>
             <div className="title">
                 {room.name}
                 {room.locked && <LockIcon fill='#E9B95B'/>}

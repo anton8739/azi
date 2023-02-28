@@ -8,7 +8,9 @@ module.exports = async (roomId,io) => {
     const cardsArray = [];
     game_state.moveOrder.forEach(id => {
         const currentPlayer = activePlayers.find(player => player.user_id === id)
-        cardsArray.push({user_id: currentPlayer.user_id, card: currentPlayer.activeCard})
+        if (currentPlayer) {
+            cardsArray.push({user_id: currentPlayer.user_id, card: currentPlayer.activeCard})
+        }
     })
     //2. Определение победителя/ начисление взяти
     let winCard = cardsArray[0];

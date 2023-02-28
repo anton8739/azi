@@ -44,22 +44,22 @@ const GameMove = ({type, show, currentBid,maxBid}) => {
                     </div>
                     {type ==="first" && <div className="game-move-actions">
                         {type ==="first"}
-                        <ButtonSecondary width='100px' height='50px' onClick={pass}>
+                        <ButtonSecondary width='fit-content' height='auto' onClick={pass}>
                             Сбросить
                         </ButtonSecondary>
-                        <ButtonPrimary width='100px' height='50px' onClick={makeBid}>
+                        <ButtonPrimary width='fit-content' height='auto' onClick={makeBid}>
                             Ставка: {value}
                         </ButtonPrimary>
                     </div>}
                     {type ==="next" && <div className="game-move-actions">
                         {type ==="first"}
-                        <ButtonSecondary width='100px' height='50px' onClick={pass}>
+                        <ButtonSecondary width='fit-content' height='auto'  onClick={pass}>
                             Сбросить
                         </ButtonSecondary>
-                        <ButtonPrimary width='100px' height='50px' onClick={confirmBid}>
+                        <ButtonPrimary width='fit-content' height='auto'  onClick={confirmBid}>
                             Уровнять: {currentBid}
                         </ButtonPrimary>
-                        <ButtonPrimary width='100px' height='50px' onClick={raiseBid}>
+                        <ButtonPrimary width='fit-content' height='auto'  onClick={raiseBid}>
                             Поднять: {currentBid + value}
                         </ButtonPrimary>
                     </div>}

@@ -16,5 +16,8 @@
     margin: 15px 15px 15px 15px;
     display: flex;
     flex-direction: column;
+    @media (max-width: 500px) {
+      margin: 5px 5px 5px 5px;
+    }
   }
 }

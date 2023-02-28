@@ -15,7 +15,7 @@ const CreateRoomModal = (props) => {
     };
 
     const handleOk = () => {
-        loadRooms()
+        loadRooms(true)
         setIsModalOpen(false);
     };
 

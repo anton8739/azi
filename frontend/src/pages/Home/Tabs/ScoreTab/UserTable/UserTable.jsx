@@ -17,7 +17,7 @@ const UserTable = ({users}) => {
         }
     })
     return (
-        <Table  className="user-table" columns={baseUserColumns} dataSource={dataSource}     pagination={false}   scroll={{x: 500, y: 400}}/>
+        <Table  className="user-table" columns={baseUserColumns} dataSource={dataSource}     pagination={false} />
     );
 }
 
