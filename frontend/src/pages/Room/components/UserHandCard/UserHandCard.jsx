@@ -18,7 +18,7 @@ const UserHandCard = ({cards, waitForGameMove, bid, bribe, winner,waitForMove,cu
     const params = useParams();
     const {user} = useAuthStore();
     const dropCard = () => {
-        if (selectedCard) {
+        if (selectedCard && !selectedCard.blocked) {
             makeGameMove(params.id, user.id, selectedCard)
             setActiveCard(null)
         }
@@ -63,8 +63,9 @@ const UserHandCard = ({cards, waitForGameMove, bid, bribe, winner,waitForMove,cu
                 <div className={`user-hand-cards `}>
                     {cards?.map(card =>
                         <div
-                            className={`item ${waitForGameMove && "active"} ${selectedCard?.value === card.value && selectedCard?.suit === card.suit && "selected"}`}
+                            className={`item ${card.blocked && "blocked"} ${waitForGameMove && "active"} ${selectedCard?.value === card.value && selectedCard?.suit === card.suit && "selected"}`}
                             onClick={() => setActiveCard(card)}>
+                            {card.blocked && <div className="card-overlay"/>}
                             <img src={cardImageMap[card.suit][card.value]} alt='card'/>
                         </div>
                     )}

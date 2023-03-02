@@ -8,4 +8,5 @@ module.exports = {
     MAKE_MOVE: 'makeMove',
     MAKE_GAME_MOVE: 'makeGameMove',
     UPDATE_USER: 'updateUser',
+    ROOM_CONNECTION_ERROR: 'roomConnectionError',
 };

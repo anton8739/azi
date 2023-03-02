@@ -8,6 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         game_start: false,
         moveOrder: [],
         firstMoveId: 0, // 0 - 6
+        firstCard: null,
         currentBid: 0,
         deck: [],
         players : [],

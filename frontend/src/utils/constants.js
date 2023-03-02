@@ -27,4 +27,5 @@ export const SOCKET_EVENTS = {
     MAKE_MOVE: 'makeMove',
     UPDATE_USER: 'updateUser',
     MAKE_GAME_MOVE: 'makeGameMove',
+    ROOM_CONNECTION_ERROR: 'roomConnectionError',
 }

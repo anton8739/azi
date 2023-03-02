@@ -13,8 +13,26 @@ module.exports = async (roomId, userId, io) => {
         game_state = {
             ...game_state, players: game_state.players.map(player => {
                 if (player.user_id === userId) {
+                    const hasSameSuiteCard = player.privateData.cards.find(card => card.suit === game_state.firstCard?.suit)
+                    let cardsWithBlock;
+                    if (hasSameSuiteCard) {
+                        cardsWithBlock = player.privateData.cards.map(card => {
+                            return {
+                                ...card,
+                                blocked: card.suit !== game_state.firstCard.suit
+                            }
+                        })
+                    } else {
+                        cardsWithBlock = player.privateData.cards.map(card => {
+                            return {
+                                ...card,
+                                blocked: false
+                            }
+                        })
+                    }
                     return {
                         ...player,
+                        privateData: {...player.privateData, cards: cardsWithBlock},
                         waitForGameMove: true,
                     }
                 }

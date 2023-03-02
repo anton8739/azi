@@ -46,6 +46,8 @@ module.exports = async (roomId,io) => {
         const newMoveOrder = [...activePlayersIds.slice(firstPlayerIndex), ...activePlayersIds.slice(0,firstPlayerIndex)];
         game_state = {...game_state, moveOrder: newMoveOrder}
     }
+    //4 сброс первой карты
+    game_state = {...game_state, firstCard: null}
     await setGameState(roomId, game_state, io)
     console.log("Определен победитель раунда / установлен новый порядок")
 }

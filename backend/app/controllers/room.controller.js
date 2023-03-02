@@ -58,7 +58,7 @@ exports.create = (req, res) => {
         players_limit: req.body.players_limit,
         bid: req.body.bid,
         locked: req.body.locked || false,
-        password: bcrypt.hashSync(req.body.password, 8),
+        password: req.body.password && bcrypt.hashSync(req.body.password, 8),
     };
     // Save Room in the database
     Room.create(room)

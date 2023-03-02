@@ -2,6 +2,8 @@ import io from 'socket.io-client';
 import {makeAutoObservable, runInAction} from "mobx";
 import {rootStore} from "stores/index";
 import {SOCKET_EVENTS} from "utils/constants";
+import {notifier} from "utils/notifier";
+import {RouteNames} from "utils/routes";
 
 const socket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:8080');
 
@@ -22,6 +24,7 @@ export default class WebsocketStore {
     activeCard = null;
     currentBalance = 0;
     currentWinner = null;
+
     constructor(rootStore) {
         makeAutoObservable(this, {rootStore: false});
         this.rootStore = rootStore;
@@ -56,13 +59,16 @@ export default class WebsocketStore {
             }
             this.gameState = {...this.gameState, ...gameState}
 
-            console.log(this.userBid)
         })
     }
     onUpdatePlayerState = async (playerState) => {
+        console.log(playerState)
         runInAction(() => {
             this.gameState = {...this.gameState, user: {...playerState.privateData}}
         })
+    }
+    onRoomConnectionError = async  (message) => {
+        notifier({ description: message, type: 'error' });
     }
 }
 socket.on(SOCKET_EVENTS.CONNECT, () => {
@@ -78,4 +84,8 @@ socket.on(SOCKET_EVENTS.UPDATE_GAME_STATE, (gameState) => {
 socket.on(SOCKET_EVENTS.UPDATE_USER_PRIVATE, (playerState) => {
     console.log("Socket game state updated")
     rootStore.websocketStore.onUpdatePlayerState(playerState)
+});
+socket.on(SOCKET_EVENTS.ROOM_CONNECTION_ERROR, (message) => {
+    console.log("Socket game state updated")
+    rootStore.websocketStore.onRoomConnectionError(message)
 });

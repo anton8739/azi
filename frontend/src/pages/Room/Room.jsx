@@ -28,7 +28,7 @@ const Room = () => {
         userBribe,
         currentBalance,
         currentWinner,
-        joinRoom
+        joinRoom,
     } = useWebsocketStore();
     const history = useHistory();
     const params = useParams();
@@ -39,15 +39,13 @@ const Room = () => {
     useEffect(() => {
         const auth = history.location.state?.auth;
         if (!auth) {
-            history.push(RouteNames.ROOM)
+            history.push(RouteNames.HOME)
         } else {
+            loadSingleRoom(params.id)
             joinRoom(params.id, user.id)
         }
     }, [])
     const iconSize = !isMiddle ? '48px' : '24px';
-    useEffect(() => {
-        loadSingleRoom(params.id)
-    }, [])
     return (
         <div className="room-wrapper" style={{backgroundImage: `url(${isMiddle ? bgSmall : bgBig})`}}>
 

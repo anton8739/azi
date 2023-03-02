@@ -14,6 +14,7 @@ module.exports = async (roomId,io) => {
         game_start: game_state.players.length > 1,
         currentBid: 0,
         firstMoveId: firstMoveId,
+        firstCard: null,
         moveOrder: [],
         deck: [],
         bank: {

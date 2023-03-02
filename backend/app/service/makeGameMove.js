@@ -7,10 +7,14 @@ const User = db.users;
 module.exports = async (roomId, userId, card, io) => {
     try {
         let game_state = await getGameState(roomId)
+        let firstCard = game_state.firstCard
         game_state = {
             ...game_state,
             players: game_state.players.map(player => {
                 if (player.user_id === userId) {
+                    if (!firstCard) {
+                        firstCard = card
+                    }
                     return {
                         ...player,
                         cardsAmount: player.cardsAmount - 1,
@@ -27,7 +31,8 @@ module.exports = async (roomId, userId, card, io) => {
 
             })
         }
-
+        /*Если первый ход круга то установить, firstCard*/
+        game_state = {...game_state, firstCard:firstCard}
         await setGameState(roomId, game_state, io)
     } catch (err) {
         console.log(err)

@@ -8,13 +8,18 @@ import GameTabSwitch from "pages/Home/Tabs/GamesTab/GameTabSwitch/GameTabSwitch"
 const GamesTab = (props) => {
     const [activeTab, setActiveTab] = useState("opened");
     const {loadRooms, rooms} = useRoomStore();
+    const [refreshTimer, setRefreshTimer] = useState(0);
     useEffect(() => {
+        console.log("refresh")
         if (activeTab === "locked") {
             loadRooms(true)
         } else {
             loadRooms(false)
         }
-    }, [activeTab])
+        setTimeout(() => {
+            setRefreshTimer(refreshTimer+1)
+        }, 3000)
+    }, [activeTab,refreshTimer])
     return (
         <div className="games-tab-container">
             <GameTabSwitch activeTab={activeTab} setActiveTab={setActiveTab}/>

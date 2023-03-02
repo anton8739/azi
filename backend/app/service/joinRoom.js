@@ -5,7 +5,9 @@ const getPrivateGameStates = require('./getPrivateGameStates')
 const getPublicState = require('./getPublicState')
 const setWaitForPlayers = require('./setWaitForPlayers')
 const gameStart = require("./game/gameStart");
+const updateRoomPlayersAmount = require('./updateRoomPlayersAmount')
 const User = db.users;
+const Room = db.rooms;
 module.exports = async (roomId,userId,io) => {
     try {
         const userData = User.findByPk(userId)
@@ -44,7 +46,9 @@ module.exports = async (roomId,userId,io) => {
         }
         game_state = setWaitForPlayers(game_state);
         await setGameState(roomId,game_state,io)
+        await updateRoomPlayersAmount(roomId, game_state.players.length)
         gameStart(roomId,io);
+        return true;
     } catch (err) {
         console.log(err)
         return null;

@@ -2,7 +2,7 @@ const gameSleep = require('../gameSleep')
 const getGameState = require("../../getGameState");
 const setGameState = require("../../setGameState");
 const singleGameMove = require("./singleGameMove")
-const findFoundWinner= require("./findRoundWinner")
+const findRoundWinner= require("./findRoundWinner")
 const findGameWinner= require('./findGameWinner')
 module.exports = async (roomId,io) => {
     let game_state = await getGameState(roomId)
@@ -18,12 +18,13 @@ module.exports = async (roomId,io) => {
         await setGameState(roomId, game_state, io)
         for (let i = 0; i<3; i++) {
             let game_state = await getGameState(roomId)
+            game_state={...game_state, firstCard: null}
             //1. игроки кладут карту
             for (let i=0; i< game_state.moveOrder.length; i++) {
                 await singleGameMove(roomId, game_state.moveOrder[i], io)
             }
             //2. опередление чья взятка на основании положенных карт
-            await findFoundWinner(roomId, io)
+            await findRoundWinner(roomId, io)
         }
 
     }

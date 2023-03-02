@@ -5,6 +5,7 @@ const getPublicState = require('./getPublicState')
 const setWaitForPlayers = require("./setWaitForPlayers");
 const resetGame = require("./game/resetGame");
 const updateUserBalance = require("./updateUserBalance");
+const updateRoomPlayersAmount = require("./updateRoomPlayersAmount");
 module.exports = async (roomId,userId,io) => {
     try {
         let game_state = await getGameState(roomId);
@@ -36,6 +37,7 @@ module.exports = async (roomId,userId,io) => {
         } else  {
             await setGameState(roomId,game_state, io)
         }
+        await updateRoomPlayersAmount(roomId, game_state.players.length)
         const publicState = getPublicState(game_state)
         return {publicState};
     } catch (err) {
