@@ -1,7 +1,7 @@
 const getGameState = require("../../getGameState");
 const setGameState = require("../../setGameState");
 const cardArray = require("../cardArray")
-module.exports = async (roomId, io) => {
+module.exports = async (roomId, io, uuid) => {
     const getSuites = (suites) => {
         const result = [];
         const arr = suites;
@@ -39,33 +39,35 @@ module.exports = async (roomId, io) => {
     const shuffledDeck = shuffleDeck(getDeckOfCards(selectedSuites));
     try {
         let game_state = await getGameState(roomId)
-        let cardCount = 0;
-        game_state = {
-            ...game_state,
-            hideCards: true,
-            players: [
-                ...game_state.players.map(player => {
-                    if (!player.disabled) {
-                        const updatedPayer = {
-                            ...player,
-                            cardsAmount: 3,
-                            privateData: {
-                                ...player.privateData,
-                                cards: [shuffledDeck[cardCount], shuffledDeck[cardCount + 1], shuffledDeck[cardCount + 2]]
+        if (uuid ===game_state.uuid) {
+            let cardCount = 0;
+            game_state = {
+                ...game_state,
+                hideCards: true,
+                players: [
+                    ...game_state.players.map(player => {
+                        if (!player.disabled) {
+                            const updatedPayer = {
+                                ...player,
+                                cardsAmount: 3,
+                                privateData: {
+                                    ...player.privateData,
+                                    cards: [shuffledDeck[cardCount], shuffledDeck[cardCount + 1], shuffledDeck[cardCount + 2]]
+                                }
                             }
+                            cardCount = cardCount + 3;
+                            return updatedPayer;
+                        } else {
+                            return player;
                         }
-                        cardCount = cardCount + 3;
-                        return updatedPayer;
-                    } else {
-                        return player;
-                    }
-                }),
-            ],
-            bank: {...game_state.bank, trumpCard: shuffledDeck[cardCount]}
+                    }),
+                ],
+                bank: {...game_state.bank, trumpCard: shuffledDeck[cardCount]}
+            }
+            cardCount=cardCount+1;
+            game_state = {...game_state, deck: shuffledDeck.splice(cardCount, shuffledDeck.length - cardCount)}
+            await setGameState(roomId, game_state, io)
         }
-        cardCount=cardCount+1;
-        game_state = {...game_state, deck: shuffledDeck.splice(cardCount, shuffledDeck.length - cardCount)}
-        await setGameState(roomId, game_state, io)
     } catch (err) {
         console.log(err)
         return null;

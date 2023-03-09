@@ -4,6 +4,7 @@
   background: $color_bg_dark;
   width: 100vw;
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   display: flex;
   justify-content: center;
   align-items: center;

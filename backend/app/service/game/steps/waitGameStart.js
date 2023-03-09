@@ -1,12 +1,13 @@
 const gameSleep = require('../gameSleep')
 const getGameState = require("../../getGameState");
 const setGameState = require("../../setGameState");
+const resetGame = require("../resetGame");
 module.exports = async (roomId,io) => {
     let game_state = await getGameState(roomId)
     if (game_state.players.length > 1 && !game_state.starting) {
         game_state = {...game_state, starting: true}
         await setGameState(roomId,game_state,io)
-        await gameSleep(5000)
+        await gameSleep(2000)
         try {
             let game_state = await getGameState(roomId)
             if (game_state.players.length > 1) {
