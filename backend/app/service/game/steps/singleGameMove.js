@@ -41,9 +41,9 @@ module.exports = async (roomId, userId, io) => {
         }
         await setGameState(roomId, game_state, io)
 
-        // 3. с задержками 2с(8 раз) проверит не поменялось ли waitForGameMove.
+        // 3. с задержками 2с(5 раз) проверит не поменялось ли waitForGameMove.
         let isWaiting = true;
-        let waitCount = 10;
+        let waitCount = 5;
         while (waitCount > 0 && isWaiting) {
             await gameSleep(2000)
             game_state = await getGameState(roomId)

@@ -24,13 +24,17 @@ module.exports = async (roomId,io) => {
             game_state = await getGameState(roomId)
             const inGamePlayer = game_state.players.filter(player => !player.disabled)
             inGamePlayer.sort((a, b) => a.bid - b.bid)
-            if (inGamePlayer.length <2 || (inGamePlayer[0]?.bid !== 0 && inGamePlayer[0]?.bid === inGamePlayer[inGamePlayer.length-1]?.bid)) {
+            if (inGamePlayer.length <2 || (inGamePlayer[0]?.bid !== 0
+                && inGamePlayer[0]?.bid === inGamePlayer[inGamePlayer.length-1]?.bid
+            )) {
                 lastMove = true;
                 break;
             }
-
         }
 
     }
+    let game_state = await getGameState(roomId)
+    game_state = {...game_state, hideCards: false}
+    await setGameState(roomId, game_state, io)
     console.log("Все игроки сделали ставку")
 }

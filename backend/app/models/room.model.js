@@ -9,6 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         moveOrder: [],
         firstMoveId: 0, // 0 - 6
         firstCard: null,
+        hideCards: true,
         currentBid: 0,
         deck: [],
         players : [],

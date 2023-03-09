@@ -15,7 +15,7 @@ import WaitForGameStart from "pages/Room/components/WaitForGameStart/WaitForGame
 
 const RoomGameZone = ({gameState,waitForMove, maxBid}) => {
     const isMiddle = useMediaQuery(useBreakPoint().down('md'));
-    const {players, user, bank, currentBid} = gameState;
+    const {players, user, bank, currentBid, hideCards} = gameState;
     return (
         <div className="room-zone-container">
             <WaitForPlayers status={gameState.wait_for_players}/>
@@ -23,18 +23,18 @@ const RoomGameZone = ({gameState,waitForMove, maxBid}) => {
             <GameMove show={waitForMove} type={user.move?.type} currentBid={currentBid} maxBid={maxBid}/>
             <AziOverlay status={user.azi}/>
             <ErrorModal open={user.error?.status} message={user.error?.message}/>
-            <GameBank trumpCard={bank.trumpCard} bankBalance={bank.balance}/>
+            <GameBank trumpCard={bank.trumpCard} bankBalance={bank.balance} hideCards={hideCards}/>
             {players.map((player, index) => !isMiddle ? <PlayerCard
                                                                     player={player}
                                                                     loading={player.waitForMove || player.waitForGameMove}
                                                                     diraction={index}
-                                                                    timer={15}
+                                                                    timer={7}
 
             /> : <PlayerCardMobile
                 player={player}
                 loading={player.waitForMove || player.waitForGameMove}
                 diraction={index}
-                timer={15}
+                timer={7}
 
             />)}
         </div>

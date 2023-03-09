@@ -10,11 +10,11 @@ import BribeIcon from "components /common/Icon/BribeIcon";
 import {useBreakPoint, useMediaQuery} from "hooks";
 import LoadingTimer from "components /common/Field/LoadingTimer/LoadingTimer";
 import TengeIcon from "components /common/Icon/TengeIcon";
-
+import card_bg from 'asserts/images/card_bg.png'
 const UserHandCard = ({cards, waitForGameMove, bid, bribe, winner,waitForMove,currentBalance}) => {
     const [selectedCard, setActiveCard] = useState(null);
     const isMiddle = useMediaQuery(useBreakPoint().down('md'))
-    const {makeGameMove, activeCard} = useWebsocketStore();
+    const {makeGameMove, activeCard, gameState} = useWebsocketStore();
     const params = useParams();
     const {user} = useAuthStore();
     const dropCard = () => {
@@ -46,7 +46,7 @@ const UserHandCard = ({cards, waitForGameMove, bid, bribe, winner,waitForMove,cu
             </div>
                 <div className='balance-wp'>
                     {(waitForMove || waitForGameMove) && <div className='loader'>
-                        <LoadingTimer size={40} isPlaying={true} timerValue={15}/>
+                        <LoadingTimer size={40} isPlaying={true} timerValue={7}/>
                     </div>}
                     <div className="balance">
                         <div>
@@ -66,7 +66,8 @@ const UserHandCard = ({cards, waitForGameMove, bid, bribe, winner,waitForMove,cu
                             className={`item ${card.blocked && "blocked"} ${waitForGameMove && "active"} ${selectedCard?.value === card.value && selectedCard?.suit === card.suit && "selected"}`}
                             onClick={() => setActiveCard(card)}>
                             {card.blocked && <div className="card-overlay"/>}
-                            <img src={cardImageMap[card.suit][card.value]} alt='card'/>
+                            {gameState.hideCards ?  <img src={card_bg} alt='card'/>: <img src={cardImageMap[card.suit][card.value]} alt='card'/>}
+
                         </div>
                     )}
                 </div>

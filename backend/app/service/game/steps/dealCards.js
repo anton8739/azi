@@ -42,6 +42,7 @@ module.exports = async (roomId, io) => {
         let cardCount = 0;
         game_state = {
             ...game_state,
+            hideCards: true,
             players: [
                 ...game_state.players.map(player => {
                     if (!player.disabled) {

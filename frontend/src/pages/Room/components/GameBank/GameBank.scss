@@ -5,9 +5,12 @@
   align-items: center;
   .tramp-card {
     img {
-      width: 60px;
+      width: 100px;
+      @media (max-width: 900px) {
+        width: 80px;
+      }
       @media (max-width: 500px) {
-        width: 30px;
+        width: 60px;
       }
     }
   }
